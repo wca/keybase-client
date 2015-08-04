@@ -36,23 +36,6 @@ func New() (*MinTerm, error) {
 	return m, nil
 }
 
-func (m *MinTerm) open() error {
-	f, err := os.OpenFile("/dev/tty", os.O_RDWR, 0)
-	if err != nil {
-		return err
-	}
-	m.tty = f
-	m.out = m.tty
-	m.in = m.tty
-	fd := int(m.tty.Fd())
-	w, h, err := terminal.GetSize(fd)
-	if err != nil {
-		return err
-	}
-	m.width, m.height = w, h
-	return nil
-}
-
 // Shutdown closes the terminal.
 func (m *MinTerm) Shutdown() error {
 	if m.tty == nil {
