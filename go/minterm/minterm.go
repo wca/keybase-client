@@ -1,5 +1,3 @@
-// +build darwin dragonfly freebsd linux nacl netbsd openbsd solaris
-
 // Package minterm implements minimal terminal functions.
 package minterm
 
@@ -11,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/keybase/gopass"
-	"golang.org/x/crypto/ssh/terminal"
+	//"golang.org/x/crypto/ssh/terminal"
 )
 
 // MinTerm is a minimal terminal interface.

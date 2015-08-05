@@ -4,7 +4,7 @@ import (
 	"os"
 	"path"
 	"sync"
-	"syscall"
+	//"syscall"
 
 	logging "github.com/op/go-logging"
 )
@@ -72,22 +72,26 @@ func (log *Logger) Configure(plain, debug bool, filename string) {
 }
 
 func (log *Logger) RotateLogFile() error {
-	log.rotateMutex.Lock()
-	defer log.rotateMutex.Unlock()
-	log.Info("Rotating log file; closing down old file")
-	_, file, err := OpenLogFile(log.filename)
-	if err != nil {
+	/*
+			log.rotateMutex.Lock()
+			defer log.rotateMutex.Unlock()
+			log.Info("Rotating log file; closing down old file")
+			_, file, err := OpenLogFile(log.filename)
+			if err != nil {
+				return err
+			}
+			err = PickFirstError(
+				syscall.Close(1),
+				syscall.Close(2),
+				syscall.Dup2(int(file.Fd()), 1),
+				syscall.Dup2(int(file.Fd()), 2),
+				file.Close(),
+			)
+			log.Info("Rotated log file; opening up new file")
+
 		return err
-	}
-	err = PickFirstError(
-		syscall.Close(1),
-		syscall.Close(2),
-		syscall.Dup2(int(file.Fd()), 1),
-		syscall.Dup2(int(file.Fd()), 2),
-		file.Close(),
-	)
-	log.Info("Rotated log file; opening up new file")
-	return err
+	*/
+	return nil
 }
 
 func OpenLogFile(filename string) (name string, file *os.File, err error) {
