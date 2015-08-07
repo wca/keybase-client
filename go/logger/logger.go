@@ -72,6 +72,7 @@ func (log *Logger) Configure(plain, debug bool, filename string) {
 }
 
 func (log *Logger) RotateLogFile() error {
+	/* NOTE COMMENTED OUT TEMP FOR TESTING */
 	/*
 			log.rotateMutex.Lock()
 			defer log.rotateMutex.Unlock()

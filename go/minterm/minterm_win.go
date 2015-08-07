@@ -4,7 +4,7 @@
 package minterm
 
 import (
-//"golang.org/x/crypto/ssh/terminal"
+	"github.com/nsf/termbox-go"
 )
 
 func (m *MinTerm) open() error {
@@ -23,5 +23,12 @@ func (m *MinTerm) open() error {
 		}
 		m.width, m.height = w, h
 	*/
+	if err := termbox.Init(); err != nil {
+		return err
+	}
+	w, h := termbox.Size()
+	m.width, m.height = w, h
+	termbox.Close()
+
 	return nil
 }
