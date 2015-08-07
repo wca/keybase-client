@@ -59,7 +59,7 @@ func (pe *Pinentry) FindProgram() (error, error) {
 	prog := pe.prog
 	var err, fatalerr error
 	if len(prog) > 0 {
-		if err = canExec(prog); err == nil {
+		if err = libkb.CanExec(prog); err == nil {
 			pe.path = prog
 		} else {
 			err = fmt.Errorf("Can't execute given pinentry program '%s': %s",

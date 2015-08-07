@@ -18,6 +18,8 @@ import (
 // Under the Apache 2.0 license
 //
 
+// Replaced by libkb.CanExec
+/*
 func canExec(s string) error {
 	fi, err := os.Stat(s)
 	if err != nil {
@@ -43,6 +45,7 @@ func canExec(s string) error {
 		return nil
 	}
 }
+*/
 
 func FindPinentry(log *logger.Logger) (string, error) {
 	if IsRemote() {

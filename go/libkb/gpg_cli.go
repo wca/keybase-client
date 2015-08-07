@@ -56,7 +56,7 @@ func (g *GpgCLI) Configure() (configExplicit bool, err error) {
 	// If we asked for any explicit GPG options
 	configExplicit = (len(prog) > 0 || opts != nil)
 	if len(prog) > 0 {
-		err = canExec(prog)
+		err = CanExec(prog)
 	} else {
 		prog, err = exec.LookPath("gpg2")
 		if err != nil {

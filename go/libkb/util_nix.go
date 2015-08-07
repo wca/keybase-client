@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func canExec(s string) error {
+func CanExec(s string) error {
 	fi, err := os.Stat(s)
 	if err != nil {
 		return err

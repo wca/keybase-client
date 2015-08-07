@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func canExec(s string) error {
+func CanExec(s string) error {
 	_, err := LookPath(s)
 
 	return err
