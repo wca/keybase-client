@@ -118,7 +118,8 @@ func (g *GlobalContext) PushShutdownHook(sh ShutdownHook) {
 }
 
 func (g *GlobalContext) ConfigureConfig() error {
-	c := NewJSONConfigFile(g.Env.GetConfigFilename())
+	configFilename := g.Env.GetConfigFilename()
+	c := NewJSONConfigFile(configFilename)
 	err := c.Load(false)
 	if err != nil {
 		return err

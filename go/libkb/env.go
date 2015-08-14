@@ -302,7 +302,7 @@ func (e *Env) GetConfigFilename() string {
 		func() string { return e.cmd.GetConfigFilename() },
 		func() string { return os.Getenv("KEYBASE_CONFIG_FILE") },
 		func() string { return e.config.GetConfigFilename() },
-		func() string { return filepath.Join(e.GetConfigDir(), ConfigFile) },
+		func() string { return filepath.Join(e.GetConfigDir(), AddFolderPrefix(ConfigFile)) },
 	)
 }
 
@@ -311,7 +311,7 @@ func (e *Env) GetSessionFilename() string {
 		func() string { return e.cmd.GetSessionFilename() },
 		func() string { return os.Getenv("KEYBASE_SESSION_FILE") },
 		func() string { return e.config.GetSessionFilename() },
-		func() string { return filepath.Join(e.GetCacheDir(), SessionFile) },
+		func() string { return filepath.Join(e.GetCacheDir(), AddFolderPrefix(SessionFile)) },
 	)
 }
 
@@ -320,7 +320,7 @@ func (e *Env) GetDbFilename() string {
 		func() string { return e.cmd.GetDbFilename() },
 		func() string { return os.Getenv("KEYBASE_DB_FILE") },
 		func() string { return e.config.GetDbFilename() },
-		func() string { return filepath.Join(e.GetDataDir(), DBFile) },
+		func() string { return filepath.Join(e.GetDataDir(), AddFolderPrefix(DBFile)) },
 	)
 }
 

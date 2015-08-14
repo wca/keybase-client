@@ -69,7 +69,6 @@ func (x XdgPosix) dirHelper(env string, prefixDirs ...string) string {
 	return x.Join(prfx, x.appName)
 }
 
-func (x XdgPosix) ConfigDir() string { return x.dirHelper("XDG_CONFIG_HOME", ".config") }
 func (x XdgPosix) CacheDir() string  { return x.dirHelper("XDG_CACHE_HOME", ".cache") }
 func (x XdgPosix) DataDir() string   { return x.dirHelper("XDG_DATA_HOME", ".local", "share") }
 

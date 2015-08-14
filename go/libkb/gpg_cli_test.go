@@ -1,7 +1,7 @@
 package libkb
 
 import (
-	"path"
+	"path/filepath"
 	"testing"
 )
 
@@ -14,7 +14,7 @@ func TestGPGKeyring(t *testing.T) {
 	}
 
 	for _, fn := range []string{"secring.gpg", "pubring.gpg"} {
-		p := path.Join(tc.Tp.GPGHome, fn)
+		p := filepath.Join(tc.Tp.GPGHome, fn)
 		ok, err := FileExists(p)
 		if err != nil {
 			t.Fatal(err)

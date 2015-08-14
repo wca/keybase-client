@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"errors"
+	"path/filepath"
 	"strings"
 )
 
@@ -112,7 +113,8 @@ func LookPath(file string) (f string, err error) {
 		return
 	}
 	if pathenv := os.Getenv(`PATH`); pathenv != `` {
-		for _, dir := range splitList(pathenv) {
+		//for _, dir := range splitList(pathenv) {
+		for _, dir := range filepath.SplitList(pathenv) {
 			if f, err = findExecutable(dir+`\`+file, exts); err == nil {
 				return
 			}
@@ -121,6 +123,7 @@ func LookPath(file string) (f string, err error) {
 	return ``, os.ErrNotExist
 }
 
+/*
 func splitList(path string) []string {
 	// The same implementation is used in SplitList in path/filepath;
 	// consider changing path/filepath when changing this.
@@ -153,3 +156,4 @@ func splitList(path string) []string {
 
 	return list
 }
+*/

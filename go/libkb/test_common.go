@@ -3,7 +3,7 @@ package libkb
 import (
 	"io/ioutil"
 	"os"
-	"path"
+	"path/filepath"
 	"testing"
 
 	keybase1 "github.com/keybase/client/protocol/go"
@@ -82,7 +82,7 @@ func (tc *TestContext) Cleanup() {
 func (tc TestContext) MoveGpgKeyringTo(dst TestContext) error {
 
 	mv := func(f string) (err error) {
-		return os.Rename(path.Join(tc.Tp.GPGHome, f), path.Join(dst.Tp.GPGHome, f))
+		return os.Rename(filepath.Join(tc.Tp.GPGHome, f), filepath.Join(dst.Tp.GPGHome, f))
 	}
 
 	if err := mv("secring.gpg"); err != nil {
@@ -96,12 +96,12 @@ func (tc TestContext) MoveGpgKeyringTo(dst TestContext) error {
 
 func (tc *TestContext) GenerateGPGKeyring(ids ...string) error {
 	tc.T.Logf("generating gpg keyring in %s", tc.Tp.GPGHome)
-	fsk, err := os.Create(path.Join(tc.Tp.GPGHome, "secring.gpg"))
+	fsk, err := os.Create(filepath.Join(tc.Tp.GPGHome, "secring.gpg"))
 	if err != nil {
 		return err
 	}
 	defer fsk.Close()
-	fpk, err := os.Create(path.Join(tc.Tp.GPGHome, "pubring.gpg"))
+	fpk, err := os.Create(filepath.Join(tc.Tp.GPGHome, "pubring.gpg"))
 	if err != nil {
 		return err
 	}
