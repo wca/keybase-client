@@ -11,6 +11,12 @@ import (
 
 func SetupEngineTest(t *testing.T, name string) libkb.TestContext {
 	tc := libkb.SetupTest(t, name)
+
+	mode := tc.G.Env.GetRunMode()
+	if mode == libkb.ProductionRunMode {
+		t.Fatalf("Refusing to run tests in %s run mode", mode)
+	}
+
 	return tc
 }
 
