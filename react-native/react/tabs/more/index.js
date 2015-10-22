@@ -7,6 +7,7 @@ import * as SearchActions from '../../actions/search'
 import { navigateTo } from '../../actions/router'
 import { pushNewProfile } from '../../actions/profile'
 import Button from '../../common-adapters/button'
+import Search from '../../search/index'
 
 export default class More extends Component {
   constructor (props) {
@@ -19,7 +20,7 @@ export default class More extends Component {
     this.state = {
       dataSource: ds.cloneWithRows([
         {name: 'Login', onClick: () => {
-          this.props.dispatch(navigateTo(['login', 'loginform']))
+          this.props.nav.push(navigateTo(['login', 'loginform']))
         }},
         {name: 'Login2', onClick: () => {
           this.props.dispatch(navigateTo(['login2', {path: 'welcome', upLink: ['about'], upTitle: 'About'}]))
@@ -47,7 +48,7 @@ export default class More extends Component {
           this.props.dispatch(navigateTo(['bridging']))
         }},
         {name: 'Search', hasChildren: true, onClick: () => {
-          this.props.dispatch(SearchActions.pushNewSearch())
+          this.props.nav.push(Search)
         }},
         {name: 'Profile', hasChildren: true, onClick: () => {
           this.props.dispatch(pushNewProfile('test12'))

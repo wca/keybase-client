@@ -1,32 +1,12 @@
 'use strict'
 
 import React, { Component, TabBarIOS, View, Navigator, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { connect } from 'react-redux/native'
 import MetaNavigator from './router/meta-navigator'
-import globalRoutes from './router/global-routes'
-
-import Folders from './tabs/folders'
-import Chat from './tabs/chat'
-import People from './tabs/people'
-import Devices from './tabs/devices'
-import NoTab from './tabs/no-tab'
-import More from './tabs/more'
 
 import { switchTab } from './actions/tabbed-router'
 import { navigateTo, navigateUp } from './actions/router'
-import { getConfig } from './actions/config'
 
 import { constants as styleConstants } from './styles/common'
-
-import {FOLDER_TAB, CHAT_TAB, PEOPLE_TAB, DEVICES_TAB, MORE_TAB} from './constants/tabs'
-
-const tabToRootComponent = {
-  [FOLDER_TAB]: Folders,
-  [CHAT_TAB]: Chat,
-  [PEOPLE_TAB]: People,
-  [DEVICES_TAB]: Devices,
-  [MORE_TAB]: More
-}
 
 function NavigationBarRouteMapper (dispatch) {
   return {
@@ -78,13 +58,6 @@ function NavigationBarRouteMapper (dispatch) {
 }
 
 export default class Nav extends Component {
-  constructor (props) {
-    super(props)
-
-    const {dispatch} = this.props
-    dispatch(getConfig())
-  }
-
   navBar () {
     const {dispatch} = this.props
     return (<Navigator.NavigationBar
@@ -117,24 +90,12 @@ export default class Nav extends Component {
       return true
     }
 
-    if (this.props.config.loaded !== nextProps.config.loaded) {
-      return true
-    }
-
     return false
   }
 
   render () {
     const {dispatch} = this.props
     const activeTab = this.props.tabbedRouter.get('activeTab')
-
-    if (!this.props.config.loaded) {
-      return (
-        <Text style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          Loading...
-        </Text>
-      )
-    }
 
     return (
       <View style={{flex: 1}}>
@@ -188,11 +149,7 @@ export default class Nav extends Component {
 
 Nav.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  tabbedRouter: React.PropTypes.object.isRequired,
-  store: React.PropTypes.object.isRequired,
-  config: React.PropTypes.shape({
-    loaded: React.PropTypes.bool.isRequired
-  }).isRequired
+  tabbedRouter: React.PropTypes.object.isRequired
 }
 
 const styles = StyleSheet.create({

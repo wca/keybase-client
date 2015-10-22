@@ -7,16 +7,14 @@ import devices from './devices'
 import search from './search'
 import profile from './profile'
 import config from './config'
-import tabbedRouter from './tabbed-router.js'
+import stateful from './stateful'
 
-export default function (state, action) {
-  return combineReducers({
-    login,
-    login2,
-    devices,
-    tabbedRouter,
-    search,
-    profile,
-    config
-  })(state, action)
-}
+export default combineReducers({
+  login,
+  login2,
+  devices,
+  search,
+  profile,
+  stateful,
+  config
+})
