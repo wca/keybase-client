@@ -6,8 +6,13 @@ import tabs from '../tabs'
 import Nav from './Nav'
 
 export default class TopNav extends Stateful {
+  constructor (...args) {
+    super(...args)
+    this.tabs = []
+  }
+
   getInitialLocalState () {
-    return { tabs: [] }
+    return { activeTab: 4, tabs: [] }
   }
 
   render () {
@@ -17,10 +22,18 @@ export default class TopNav extends Stateful {
         title={tab.title}
         systemIcon={tab.systemIcon}
         selected={i === this.localState.activeTab}
-        onPress={() => this.localState.set('activeTab', i)}
+        onPress={() => {
+          if (this.localState.activeTab === i) {
+            const tab = this.tabs[i]
+            tab.popToTop && tab.popToTop()
+            return
+          }
+          this.localState.set('activeTab', i)
+        }}
       ><Nav
+        ref={tab => this.tabs[i] = tab}
         stateKey={['tabs', i]}
-        initialComponent={tab.component}
+        initialComponent={tab.rootComponent}
       /></TabBarIOS.Item>))}
     </TabBarIOS>)
   }

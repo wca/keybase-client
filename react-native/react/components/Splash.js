@@ -2,13 +2,12 @@
 
 import React, { Component, Text, View } from 'react-native'
 import { connect } from 'react-redux/native'
-import { StateStore } from '../stateful'
 import { getConfig } from '../actions/config'
 import TopNav from './TopNav'
 
 class Splash extends Component {
   componentWillMount () {
-    this.context.store.dispatch(getConfig())
+    this.props.dispatch(getConfig())
   }
 
   render () {
@@ -19,10 +18,6 @@ class Splash extends Component {
         </View>)
     )
   }
-}
-
-Splash.contextTypes = {
-  store: React.PropTypes.object.isRequired
 }
 
 export default connect(store => ({ configLoaded: store.config.loaded }))(Splash)

@@ -48,7 +48,7 @@ export default class More extends Component {
           this.props.dispatch(navigateTo(['bridging']))
         }},
         {name: 'Search', hasChildren: true, onClick: () => {
-          this.props.nav.push(Search)
+          this.context.navigator.push(Search)
         }},
         {name: 'Profile', hasChildren: true, onClick: () => {
           this.props.dispatch(pushNewProfile('test12'))
@@ -103,6 +103,10 @@ export default class More extends Component {
 
 More.propTypes = {
   dispatch: React.PropTypes.func.isRequired
+}
+
+More.contextTypes = {
+  navigator: React.PropTypes.object.isRequired
 }
 
 const styles = StyleSheet.create({
