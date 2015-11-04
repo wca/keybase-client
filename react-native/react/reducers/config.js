@@ -11,6 +11,10 @@ type ConfigState = {
   config: ?any;
   error: ?any;
   devConfig: ?any;
+  pushPermission: ?{
+    status: string;
+    since: ?number
+  }
 }
 
 const initialState: ConfigState = {
@@ -18,7 +22,10 @@ const initialState: ConfigState = {
   status: null,
   config: null,
   error: null,
-  devConfig: null
+  devConfig: null,
+  pushPermission: {
+    state: Constants.pushPermissionStatus.loading
+  }
 }
 
 export default function (state: ConfigState = initialState, action: any): ConfigState {

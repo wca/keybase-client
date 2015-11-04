@@ -5,6 +5,8 @@ import QRCodeGen from 'qrcode-generator'
 import { appendRouteOnUnchanged, navigateTo } from './router'
 import engine from '../engine'
 
+import { pushNewSearch } from '../actions/search' // do not commit
+
 export function login (username, passphrase) {
   return function (dispatch) {
     dispatch({
@@ -258,6 +260,7 @@ export function autoLogin () {
           type: Constants.loginDone,
           payload: status
         })
+        // dispatch(pushNewSearch())// do not commit
       }
     })
   }

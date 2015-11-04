@@ -77,4 +77,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 
 [version]
-0.17.0
+0.18.1

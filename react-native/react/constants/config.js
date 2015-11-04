@@ -18,3 +18,11 @@ export const devConfigLoading = 'devConfigLoadin'
 export const devConfigLoaded = 'devConfigLoaded'
 export const devConfigUpdate = 'devConfigUpdate'
 export const devConfigSaved = 'devConfigSaved'
+
+export const pushPermissionStatus = {
+  loading: 'loading',
+  never_prompted: 'never_prompted',
+  continued: 'continued',
+  declined: 'declined',
+  deferred: 'deferred'
+}

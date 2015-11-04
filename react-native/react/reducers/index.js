@@ -8,6 +8,7 @@ import search from './search'
 import profile from './profile'
 import config from './config'
 import tabbedRouter from './tabbed-router.js'
+import ui from './ui'
 
 export default function (state, action) {
   return combineReducers({
@@ -17,6 +18,7 @@ export default function (state, action) {
     tabbedRouter,
     search,
     profile,
-    config
+    config,
+    ui
   })(state, action)
 }

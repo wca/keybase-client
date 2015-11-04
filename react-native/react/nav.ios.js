@@ -83,7 +83,7 @@ function NavigationBarRouteMapper (navigateTo, navigateUp) {
   }
 }
 
-export default class Nav extends Component {
+class Nav extends Component {
   constructor (props) {
     super(props)
 
@@ -216,6 +216,8 @@ Nav.propTypes = {
     error: React.PropTypes.object
   }).isRequired
 }
+
+export default connect(state => state)(Nav)
 
 const styles = StyleSheet.create({
   tabContent: {
