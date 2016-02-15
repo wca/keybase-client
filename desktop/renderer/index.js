@@ -10,7 +10,7 @@ import configureStore from '../shared/store/configure-store'
 import Nav from '../shared/nav.desktop'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import ListenLogUi from '../shared/native/listen-log-ui'
-import {reduxDevToolsEnable, devStoreChangingFunctions} from '../shared/local-debug.desktop'
+import {reduxDevToolsEnable, devStoreChangingFunctions, viewsTest} from '../shared/local-debug.desktop'
 import {listenForNotifications} from '../shared/actions/notifications'
 import hello from '../shared/util/hello'
 
@@ -22,6 +22,8 @@ import electron, {ipcRenderer} from 'electron'
 import RemoteManager from './remote-manager'
 import consoleHelper from '../app/console-helper'
 import _ from 'lodash'
+
+import ViewsTest from '../shared/more/viewsTest'
 
 consoleHelper()
 
@@ -107,6 +109,10 @@ class Keybase extends Component {
     if (__DEV__ && reduxDevToolsEnable) { // eslint-disable-line no-undef
       const DevTools = require('./redux-dev-tools').default
       dt = <DevTools />
+    }
+
+    if (viewsTest) {
+      return <ViewsTest/>
     }
 
     return (

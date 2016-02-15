@@ -344,9 +344,7 @@ const styles = {
     ...globalStyles.flexBoxColumn,
     position: 'relative',
     overflow: 'hidden',
-    height: 364,
     minHeight: 364,
-    maxHeight: 364,
     flex: 1
   },
   header: {
@@ -383,11 +381,6 @@ const styles = {
     backgroundColor: globalColors.grey5,
     justifyContent: 'space-between',
     padding: 10
-  },
-  personalTLDStyle: {
-    fontSize: 15,
-    lineHeight: '18px',
-    color: globalColors.lightBlue
   },
   showAllBox: {
     color: globalColors.white,

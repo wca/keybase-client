@@ -180,7 +180,8 @@ export default connect(
     loggedIn: state.config && state.config.status && state.config.status.loggedIn,
     folders: state.favorite && state.favorite.folders
   }),
-  dispatch => bindActionCreators({...favoriteAction, openInKBFS, switchTab}, dispatch)
+  dispatch => bindActionCreators({...favoriteAction, openInKBFS, switchTab}, dispatch),
+  (stateProps, dispatchProps, ownProps) => Object.assign({}, stateProps, dispatchProps, ownProps)
 )(Menubar)
 
 export function selector (): (store: Object) => Object {

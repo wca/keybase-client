@@ -19,7 +19,8 @@ let config = {
   enableActionLogging: true,
   forwardLogs: true,
   devStoreChangingFunctions: false,
-  printOutstandingRPCs: false
+  printOutstandingRPCs: false,
+  viewsTest: false
 }
 
 if (__DEV__ && process.env.KEYBASE_LOCAL_DEBUG) { // eslint-disable-line no-undef
@@ -36,6 +37,7 @@ if (__DEV__ && process.env.KEYBASE_LOCAL_DEBUG) { // eslint-disable-line no-unde
   config.forwardLogs = true
   config.devStoreChangingFunctions = true
   config.printOutstandingRPCs = true
+  config.viewsTest = false
 }
 
 config = updateConfig(config)
@@ -51,7 +53,8 @@ export const {
   enableStoreLogging,
   forwardLogs,
   devStoreChangingFunctions,
-  printOutstandingRPCs
+  printOutstandingRPCs,
+  viewsTest
 } = config
 
 export function initTabbedRouterState (state) {

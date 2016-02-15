@@ -18,6 +18,7 @@ import tracker from '../tracker'
 import components from './component-sheet'
 import componentsTracker from './components-tracker'
 import styleSheet from './style-sheet'
+import viewsTest from './viewsTest'
 
 class Foo extends Component {
   render () {
@@ -78,6 +79,9 @@ class DevMenu extends Component {
       }},
       {name: 'Stylesheet', hasChildren: true, onClick: () => {
         this.props.routeAppend(['styleSheet'])
+      }},
+      {name: 'Views Test', hasChildren: true, onClick: () => {
+        this.props.routeAppend(['viewsTest'])
       }}
     ]
     return (
@@ -88,7 +92,7 @@ class DevMenu extends Component {
   static parseRoute () {
     return {
       componentAtTop: {title: 'Dev Menu'},
-      subRoutes: {developer, login, pinentry, tracker, components, componentsTracker, styleSheet}
+      subRoutes: {developer, login, pinentry, tracker, components, componentsTracker, styleSheet, viewsTest}
     }
   }
 }
