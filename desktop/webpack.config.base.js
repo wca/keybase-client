@@ -40,7 +40,8 @@ module.exports = {
     packageMains: ['webpackLoader', 'webLoader', 'loader', 'main']
   },
   plugins: [
-    new webpack.DefinePlugin(defines)
+    new webpack.DefinePlugin(defines),
+    new webpack.NormalModuleReplacementPlugin(/^msgpack$/, process.cwd() + '/null.js')
   ],
   node: {
     __dirname: true
