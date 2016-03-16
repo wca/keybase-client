@@ -3190,7 +3190,14 @@
     "mkdirp": {
       "version": "0.5.1",
       "from": "mkdirp@0.5.1",
-      "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz"
+      "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz",
+      "dependencies": {
+        "minimist": {
+          "version": "0.0.8",
+          "from": "minimist@0.0.8",
+          "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
+        }
+      }
     },
     "mkpath": {
       "version": "0.1.0",
@@ -4918,8 +4925,8 @@
     },
     "purepack": {
       "version": "1.0.4",
-      "from": "keybase/purepack#nojima/keybase-client-changes",
-      "resolved": "git://github.com/keybase/purepack.git#0b3603246149ac72bb7b4e1ae849ea5f2a00bab8"
+      "from": "purepack@1.0.4",
+      "resolved": "https://registry.npmjs.org/purepack/-/purepack-1.0.4.tgz"
     },
     "q": {
       "version": "1.4.1",
