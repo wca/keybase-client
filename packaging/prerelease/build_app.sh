@@ -12,7 +12,7 @@ nopull=${NOPULL:-} # Don't git pull
 client_commit=${CLIENT_COMMIT:-} # Commit hash on client to build from
 kbfs_commit=${KBFS_COMMIT:-} # Commit hash on kbfs to build from
 bucket_name=${BUCKET_NAME:-"prerelease.keybase.io"}
-platform=${PLATFORM:-} # darwin,linux,windows (Only darwin is supported in this script)
+platform=${PLATFORM:-`uname`}
 nos3=${NOS3:-} # Don't sync to S3
 build_desc="build"
 
@@ -20,12 +20,6 @@ if [ "$gopath" = "" ]; then
   echo "No GOPATH"
   exit 1
 fi
-
-if [ "$platform" = "" ]; then
-  echo "No PLATFORM"
-  exit 1
-fi
-echo "Platform: $platform"
 
 # If testing, use test bucket
 if [ "$istest" = "1" ]; then
@@ -38,7 +32,7 @@ if [ "$nos3" = "1" ]; then
 fi
 
 if [ ! "$bucket_name" = "" ]; then
-  echo "Bucket name: $bucket_name"
+  echo "Using S3 bucket: $bucket_name"
 fi
 
 build_dir_keybase="/tmp/build_keybase"
@@ -88,7 +82,7 @@ cd $dir/../desktop
 save_dir="/tmp/build_desktop"
 rm -rf $save_dir
 
-if [ "$platform" = "darwin" ]; then
+if [ "$platform" = "Darwin" ]; then
   SAVE_DIR=$save_dir KEYBASE_BINPATH="$build_dir_keybase/keybase" KBFS_BINPATH="$build_dir_kbfs/kbfs" BUCKET_NAME=$bucket_name ./package_darwin.sh
 else
   # TODO: Support linux build here?
@@ -96,8 +90,9 @@ else
   exit 1
 fi
 
-BUCKET_NAME="$bucket_name" PLATFORM="$platform" ./s3_index.sh
+cd $dir
+BUCKET_NAME="$bucket_name" ./s3_index.sh
 
-"$client_dir/packaging/slack/send.sh" "Finished $platform $build_desc (keybase: $version, kbfs: $kbfs_version). See https://s3.amazonaws.com/$bucket_name/index.html"
+"$client_dir/packaging/slack/send.sh" "Finished $build_desc (keybase: $version, kbfs: %kbfs_version). See https://s3.amazonaws.com/$bucket_name/index.html"
 
 BUCKET_NAME="$bucket_name" ./report.sh
