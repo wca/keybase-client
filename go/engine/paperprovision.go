@@ -50,7 +50,7 @@ func (e *PaperProvisionEngine) RequiredUIs() []libkb.UIKind {
 func (e *PaperProvisionEngine) Run(ctx *Context) (err error) {
 	e.G().Log.Debug("+ PaperProvisionEngine Run")
 
-	e.G().Log.Debug("attempting device provisioning")
+	defer e.G().Trace("PaperProvisionEngine#Run", func() error { return err })()
 
 	// clear out any existing session:
 	e.G().Logout()
@@ -235,9 +235,6 @@ func (e *PaperProvisionEngine) makeDeviceKeys(ctx *Context, args *DeviceWrapArgs
 		return err
 	}
 
-	// TODO: do we need these?
-	//	e.signingKey = eng.SigningKey()
-	//	e.encryptionKey = eng.EncryptionKey()
 	return nil
 }
 
@@ -258,15 +255,14 @@ func (e *PaperProvisionEngine) ensureLKSec(ctx *Context) error {
 }
 
 // copied from loginProvision
-// ppStream gets the passphrase stream, either cached or via
-// SecretUI.
+// ppStream gets the passphrase stream from the cache
 func (e *PaperProvisionEngine) ppStream(ctx *Context) (*libkb.PassphraseStream, error) {
-	if ctx.LoginContext != nil {
-		cached := ctx.LoginContext.PassphraseStreamCache()
-		if cached == nil {
-			return nil, errors.New("loginProvision: ppStream() -> nil PassphraseStreamCache")
-		}
-		return cached.PassphraseStream(), nil
+	if ctx.LoginContext == nil {
+		return nil, errors.New("loginProvision: ppStream() -> nil ctx.LoginContext")
 	}
-	return e.G().LoginState().GetPassphraseStreamForUser(ctx.SecretUI, e.User.GetName())
+	cached := ctx.LoginContext.PassphraseStreamCache()
+	if cached == nil {
+		return nil, errors.New("loginProvision: ppStream() -> nil PassphraseStreamCache")
+	}
+	return cached.PassphraseStream(), nil
 }
