@@ -589,7 +589,8 @@ export const kbfs = {
     'signing': 2,
     'verifying': 3,
     'rekeying': 4,
-    'connection': 5
+    'connection': 5,
+    'mdReadSuccess': 6
   },
   'FSErrorType': {
     'accessDenied': 0,
@@ -810,7 +811,8 @@ export const NotifyFS = {
     'signing': 2,
     'verifying': 3,
     'rekeying': 4,
-    'connection': 5
+    'connection': 5,
+    'mdReadSuccess': 6
   },
   'FSErrorType': {
     'accessDenied': 0,
