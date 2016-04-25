@@ -85,7 +85,6 @@ Source: "..\..\..\kbfs\kbfsdokan\kbfsdokan.exe"; DestDir: "{app}"; Flags: replac
 [Icons]
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\{#MyAppName} CMD"; Filename: "cmd.exe"; WorkingDir: "{app}"; IconFilename: "{app}\{#MyExeName}"; Parameters: "/K ""set PATH=%PATH%;{app}"""
-Name: "{userstartup}\Keybase UI"; Filename: "{app}\gui\Keybase.exe"
 Name: "{group}\Keybase UI"; Filename: "{app}\gui\Keybase.exe"
 
 [Registry]
@@ -242,13 +241,14 @@ begin
   Result := true;
   fileName := ExpandConstant('{userstartup}\{#MyAppName}.vbs');
   Log('Created ' + fileName);
-  SetArrayLength(lines, 5);
+  SetArrayLength(lines, 6);
 
   lines[0] := 'Dim WinScriptHost';
   lines[1] := 'Set WinScriptHost = CreateObject("WScript.Shell")';
   lines[2] := ExpandConstant('WinScriptHost.Run Chr(34) & "{app}\{#MyExeName}" & Chr(34) & " ctl watchdog", 0');
   lines[3] := ExpandConstant('WinScriptHost.Run Chr(34) & "{app}\kbfsdokan.exe" & Chr(34) & " -log-to-file -debug k:", 0');
-  lines[4] := 'Set WinScriptHost = Nothing';
+  lines[4] := ExpandConstant('WinScriptHost.Run Chr(34) & "{app}\gui\Keybase.exe" & Chr(34), 0');
+  lines[5] := 'Set WinScriptHost = Nothing';
 
   Result := SaveStringsToFile(filename,lines,true);
   exit;
