@@ -41,7 +41,7 @@ if (__DEV__ && process.env.KEYBASE_LOCAL_DEBUG) {
   config.reactPerf = false
   config.overrideLoggedInTab = Tabs.moreTab
   config.focusOnShow = false
-  config.dumbFilter = 'tracker'
+  config.dumbFilter = 'device page'
 }
 
 config = updateConfig(config)
